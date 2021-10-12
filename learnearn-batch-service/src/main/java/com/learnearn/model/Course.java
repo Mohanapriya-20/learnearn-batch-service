@@ -18,6 +18,8 @@ import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,14 +46,19 @@ public class Course {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 8)
 	private PostPriority priority;
+	
 	@OneToMany
 	@JoinColumn
 	Set<Trainer> trainerList;
+	
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	Company company;
+	
 	@ManyToOne
 	@JoinColumn(name="batch_id")
 	Batch batch;
+	
+
 	
 }

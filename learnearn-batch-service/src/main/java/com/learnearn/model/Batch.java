@@ -17,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +46,7 @@ public class Batch {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 8)
 	private PostPriority priority;
+	
 	public Batch(String batchName, String owner, LocalDateTime startDate, LocalDateTime endDate, PostStatus status,
 			PostPriority priority) {
 		super();
@@ -53,11 +56,20 @@ public class Batch {
 		this.endDate = endDate;
 		this.status = status;
 		this.priority = priority;
+		
 	}
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
+	
 	@OneToMany
 	@JoinColumn(name="batch_id")
 	private Set<Course> courseList;
+
+	@Override
+	public String toString() {
+		return "Batch [batchId=" + batchId + ", batchName=" + batchName + ", owner=" + owner + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", status=" + status + ", priority=" + priority + ", courseList="
+				+ courseList + "]";
+	}
 }

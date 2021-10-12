@@ -19,7 +19,6 @@ public interface IBatchRepository extends JpaRepository<Batch, Integer> {
 
 	List<Batch> findByOwner(String owner);
 
-	@Query("from Batch b where b.startDate=?1 and b.endDate=?2")
 	List<Batch> findByStartDateAndEndDate(LocalDateTime startDate,LocalDateTime endDate);
 
 	List<Batch> findByStatus(PostStatus status);
